@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "726492729658",
+    "project_id": "personalnotesapp-983eb",
+    "storage_bucket": "personalnotesapp-983eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:726492729658:android:2d2f84b84e3bfbe2adc003",
+        "android_client_info": {
+          "package_name": "com.reflieHer.personalnotesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "726492729658-th8e654t8mjlc0d9hhm4ebpuaehih924.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuoZQ0TZm9aNJzwZo-8ejmCsCIJVaqG30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "726492729658-th8e654t8mjlc0d9hhm4ebpuaehih924.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
