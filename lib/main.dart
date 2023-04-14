@@ -1,18 +1,20 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 
 import 'package:personalnotesapp/constants/routes.dart';
 import 'package:personalnotesapp/services/auth/auth_service.dart';
 import 'package:personalnotesapp/utilities/show_error_dialog.dart';
 import 'package:personalnotesapp/views/login_view.dart';
+import 'package:personalnotesapp/views/notes/new_notes_view.dart';
 import 'package:personalnotesapp/views/register_view.dart';
 import 'package:personalnotesapp/views/verify_email_view.dart';
 
 import 'dart:developer' as devtools show log;
 
 import 'utilities/show_logout_dialog.dart';
-import 'views/notes_view.dart';
+import 'views/notes/notes_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +28,7 @@ void main() {
       loginRoute: (context) => const Loginview(),
       registerRoute: (context) => const RegisterView(),
       notesRoute: (context) => const notesview(),
-      verifyEmailRoute: (context) => const verifyEmailView()
+      newNotesRoute:(context)=> const newNotesView(),
     },
   ));
 }
@@ -51,7 +53,7 @@ class Homepage extends StatelessWidget {
             } else {
               return const Loginview();
             }
-            return const Text('done');
+            
 
           default:
             return const CircularProgressIndicator();
