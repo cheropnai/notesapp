@@ -30,9 +30,9 @@ class _newNotesViewState extends State<newNotesView> {
     await _notesService.updateNotes(note: note, text: text);
   }
 
-  void setupTextControllerListener() {
+  void _setupTextControllerListener() {
     _textController.removeListener(_textControllerListener);
-    _textController.addListener(_textControllerListener); 
+    _textController.addListener(_textControllerListener);
   }
 
   Future<databaseNotes> createNewNote() async {
@@ -78,7 +78,27 @@ class _newNotesViewState extends State<newNotesView> {
       appBar: AppBar(
         title: const Text('create a new note'),
       ),
-      body: const Text('write your new note here ...'),
+      body: FutureBuilder(
+        future: createNewNote(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.done:
+              //getting notes from snapshot
+              _note = snapshot.data as databaseNotes?;
+              _setupTextControllerListener();
+              return TextField(
+                controller: _textController,
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                decoration: const InputDecoration(
+                    hintText: 'start typing your notes here ...'),
+              );
+
+            default:
+              return const CircularProgressIndicator();
+          }
+        },
+      ),
     );
   }
 }
