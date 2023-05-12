@@ -13,6 +13,7 @@ class newNotesView extends StatefulWidget {
 class _newNotesViewState extends State<newNotesView> {
   databaseNotes? _note;
   late final NotesService _notesService;
+  //late final myFocusNode = FocusNode();
   late final TextEditingController _textController;
   @override
   void initState() {
@@ -68,6 +69,7 @@ class _newNotesViewState extends State<newNotesView> {
   void dispose() {
     _deleteNoteIfTextIsEmpty();
     _saveNotIfTextIsNotEmpty();
+
     _textController.dispose();
     super.dispose();
   }
@@ -83,7 +85,11 @@ class _newNotesViewState extends State<newNotesView> {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
+
               //getting notes from snapshot
+              print(snapshot.data);
+              Text('error: ${snapshot.error}');
+
               _note = snapshot.data;
               _setupTextControllerListener();
               return TextField(

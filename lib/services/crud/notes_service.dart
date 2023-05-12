@@ -78,6 +78,7 @@ class NotesService {
         await db.query(noteTable, limit: 1, where: 'id = ?', whereArgs: [id]);
 
     if (notes.isEmpty) {
+      print('there are no notes');
       throw CouldNotFindNotes();
     } else {
       final note = databaseNotes.fromRow(notes.first);
@@ -122,6 +123,7 @@ class NotesService {
     final db = _getDatabaseOrThrow();
     final dbUser = await getUser(email: owner.email);
     if (dbUser != owner) {
+      print('no user found');
       throw CouldNotFindUser();
     }
     const text = '';
@@ -148,6 +150,7 @@ class NotesService {
     //print(DatabaseUser.fromRow(results.first));
     //return DatabaseUser.fromRow(results.first);
     if (results.isEmpty) {
+      print('no user found');
       throw CouldNotFindUser();
     } else {
       return DatabaseUser.fromRow(results.first);
@@ -185,6 +188,7 @@ class NotesService {
   Database _getDatabaseOrThrow() {
     final db = _db;
     if (db == null) {
+      print('db is null');
       throw DatabaseIsNotOpen();
     } else {
       return db;
@@ -194,7 +198,8 @@ class NotesService {
   Future<void> close() async {
     final db = _db;
     if (db == null) {
-      throw DatabaseIsNotOpen();
+      //throw DatabaseIsNotOpen();
+      print('db is not open');
     } else {
       await db.close();
       _db = null;
@@ -297,16 +302,16 @@ const textColumn = "text";
 const isSyncedWithCloudColumn = "is_synced_with_cloud";
 
 const createUserTable = '''CREATE TABLE IF NOT EXISTS "user" (
-	"id"	INTEGER NOT NULL,
+	"id"	INTEGER,
 	"email"	TEXT NOT NULL UNIQUE,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );''';
 
 const createNoteTable = '''CREATE TABLE IF NOT EXISTS "note" (
-	"id"	INTEGER NOT NULL,
-	"user_id"	INTEGER NOT NULL,
+	"id"	INTEGER,
+	"user_id"	INTEGER,
 	"text"	TEXT,
-	"is_synced_with_cloud"	INTEGER NOT NULL DEFAULT 0,
+	"is_synced_with_cloud"	INTEGER DEFAULT 0,
 	PRIMARY KEY("id" AUTOINCREMENT),
 	FOREIGN KEY("user_id") REFERENCES "user"("id")
 );''';
