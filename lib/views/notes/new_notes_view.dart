@@ -87,8 +87,8 @@ class _newNotesViewState extends State<newNotesView> {
             case ConnectionState.done:
 
               //getting notes from snapshot
-              print(snapshot.data);
-              Text('error: ${snapshot.error}');
+              //print(snapshot.data);
+              //Text('error: ${snapshot.error}');
 
               _note = snapshot.data;
               _setupTextControllerListener();

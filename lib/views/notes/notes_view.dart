@@ -21,7 +21,7 @@ class _notesviewState extends State<notesview> {
   @override
   void initState() {
     _notesService = NotesService();
-    _notesService.open();
+    // _notesService.open();
     super.initState();
   }
 
@@ -74,7 +74,7 @@ class _notesviewState extends State<notesview> {
                     case ConnectionState.waiting:
                     //case ConnectionState.active:
                     //return const Text('am active and receiving notes');
-                    case ConnectionState.active:
+                    case ConnectionState.done:
                       //print(snapshot.data);
                       return StreamBuilder(
                         stream: _notesService.allNotes,
@@ -84,9 +84,6 @@ class _notesviewState extends State<notesview> {
                               return const Text('no connection');
 
                             case ConnectionState.waiting:
-                              print(snapshot.error);
-                              print(snapshot.data);
-                              return const Text('waiting for connection');
                             case ConnectionState.active:
                               if (snapshot.hasData) {
                                 final allNotes =
