@@ -41,10 +41,17 @@ class _newNotesViewState extends State<newNotesView> {
     if (existingNote != null) {
       return existingNote;
     }
-    final currentUser = AuthService.firebase().currentUser!;
-    final email = currentUser.email!;
-    final owner = await _notesService.getUser(email: email);
-    return await _notesService.createNote(owner: owner);
+    final currentUser = AuthService.firebase().currentUser;
+    if (currentUser != null) {
+      final email = currentUser.email;
+
+      final owner = await _notesService.getUser(email: email ?? '');
+
+      return await _notesService.createNote(owner: owner);
+    } else {
+      return databaseNotes(
+          id: 0, userId: 0, text: 'hey', isSyncedWithCloud: false);
+    }
   }
 
   void _deleteNoteIfTextIsEmpty() {
@@ -88,17 +95,27 @@ class _newNotesViewState extends State<newNotesView> {
 
               //getting notes from snapshot
               //print(snapshot.data);
-              //Text('error: ${snapshot.error}');
+              //Text('error: ${snapshot.error}')
+              //;
+              print(snapshot.error);
+              // print(snapshot.data);
 
               _note = snapshot.data;
               _setupTextControllerListener();
-              return TextField(
-                controller: _textController,
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: const InputDecoration(
-                    hintText: 'start typing your notes here ...'),
-              );
+
+              final bool isInputActive = FocusScope.of(context).hasFocus;
+              if (isInputActive) {
+                return TextField(
+                  controller: _textController,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'Start typing your notes here...',
+                  ),
+                );
+              } else {
+                return const SizedBox(); // If input is not active, return an empty SizedBox
+              }
 
             default:
               return const CircularProgressIndicator();

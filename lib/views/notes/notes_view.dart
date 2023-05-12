@@ -16,7 +16,7 @@ class notesview extends StatefulWidget {
 
 class _notesviewState extends State<notesview> {
   late final NotesService _notesService;
-  String get userEmail => AuthService.firebase().currentUser!.email!;
+  String? get userEmail => AuthService.firebase().currentUser?.email;
 
   @override
   void initState() {
@@ -62,7 +62,7 @@ class _notesviewState extends State<notesview> {
         ],
       ),
       body: FutureBuilder(
-        future: _notesService.getOrCreateUser(email: userEmail),
+        future: _notesService.getOrCreateUser(email: userEmail ?? ''),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
@@ -88,10 +88,17 @@ class _notesviewState extends State<notesview> {
                               if (snapshot.hasData) {
                                 final allNotes =
                                     snapshot.data as List<databaseNotes>;
-                                print(allNotes);
-                                return const Text('got all the notes');
+                                return ListView.builder(
+                                    itemCount: allNotes.length,
+                                    itemBuilder: (context, index) {
+                                      final note = allNotes[index];
+                                      return ListTile(title:Text( note.text,
+                                      maxLines: 1,
+                                      softWrap: true,
+                                      overflow: TextOverflow.ellipsis,),);
+                                    });
                               } else {
-                                return const CircularProgressIndicator();
+                                return const Text('item 1');
                               }
                             default:
                               return const CircularProgressIndicator();
