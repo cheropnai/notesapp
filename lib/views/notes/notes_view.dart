@@ -73,9 +73,9 @@ class _notesviewState extends State<notesview> {
                     case ConnectionState.waiting:
                     case ConnectionState.active:
                       if (snapshot.hasData) {
-                        // print(snapshot.data);
-                        print(snapshot.error);
-                        return const Text('data');
+                        final allnotes = snapshot.data as List<databaseNotes>;
+                        // print(allnotes);
+                        return const Text('all data');
                       } else
                         return const CircularProgressIndicator();
 

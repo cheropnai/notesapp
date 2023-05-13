@@ -13,11 +13,11 @@ class NotesService {
   static final NotesService _shared = NotesService._sharedInstance();
 
   NotesService._sharedInstance() {
-    _notesStreamController =
-        StreamController<List<databaseNotes>>.broadcast(onListen: () {
-      _notesStreamController.sink.add(_notes);
-
-    },);
+    _notesStreamController = StreamController<List<databaseNotes>>.broadcast(
+      onListen: () {
+        _notesStreamController.sink.add(_notes);
+      },
+    );
   }
   factory NotesService() => _shared;
 
@@ -120,6 +120,8 @@ class NotesService {
     //make sure owner exists in the database with the correct id
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
+    print(db);
+    print('printing db');
     final dbUser = await getUser(email: owner.email);
     if (dbUser != null) {
       throw CouldNotFindUser();

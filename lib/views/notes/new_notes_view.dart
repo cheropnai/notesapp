@@ -37,13 +37,17 @@ class _newNotesViewState extends State<newNotesView> {
   }
 
   Future<databaseNotes> createNewNote() async {
+    print('creating note');
     final existingNote = _note;
     if (existingNote != null) {
       return existingNote;
     }
     final currentUser = AuthService.firebase().currentUser!;
     final email = currentUser.email!;
+    print(email);
     final owner = await _notesService.getUser(email: email);
+    print('this is ownerrrrrrrrrrr');
+    print(owner);
     return await _notesService.createNote(owner: owner);
   }
 
@@ -85,8 +89,8 @@ class _newNotesViewState extends State<newNotesView> {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               //getting notes from snapshot
-              print(snapshot.data);
-              _note = snapshot.data;
+              // print(snapshot.data);
+              _note = snapshot.data as databaseNotes;
               _setupTextControllerListener();
               return TextField(
                 controller: _textController,
