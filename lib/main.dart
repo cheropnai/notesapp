@@ -28,7 +28,7 @@ void main() {
       loginRoute: (context) => const Loginview(),
       registerRoute: (context) => const RegisterView(),
       notesRoute: (context) => const notesview(),
-      newNotesRoute:(context)=> const newNotesView(),
+      newNotesRoute:(context)=> const NewNoteView(),
     },
   ));
 }
