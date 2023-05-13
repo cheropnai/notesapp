@@ -73,7 +73,8 @@ class _notesviewState extends State<notesview> {
                     case ConnectionState.waiting:
                     case ConnectionState.active:
                       if (snapshot.hasData) {
-                        print(snapshot.data);
+                        // print(snapshot.data);
+                        print(snapshot.error);
                         return const Text('data');
                       } else
                         return const CircularProgressIndicator();

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:personalnotesapp/services/crud/notes_service.dart';
 
 import '../../services/auth/auth_service.dart';
+import 'dart:ffi';
 
 class newNotesView extends StatefulWidget {
   const newNotesView({super.key});
@@ -84,6 +85,7 @@ class _newNotesViewState extends State<newNotesView> {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               //getting notes from snapshot
+              print(snapshot.data);
               _note = snapshot.data;
               _setupTextControllerListener();
               return TextField(
