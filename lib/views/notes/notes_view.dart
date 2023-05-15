@@ -1,4 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:personalnotesapp/services/auth/auth_service.dart';
 import 'package:personalnotesapp/services/crud/notes_service.dart';
@@ -18,7 +18,7 @@ class notesview extends StatefulWidget {
 
 class _notesviewState extends State<notesview> {
   late final NotesService _notesService;
-  String get userEmail => AuthService.firebase().currentUser!.email!;
+  String get userEmail => AuthService.firebase().currentUser!.email;
 
   @override
   void initState() {
@@ -88,7 +88,7 @@ class _notesviewState extends State<notesview> {
                             );
                           },
                         );
-                        print(allNotes);
+                        
                       } else
                         return const CircularProgressIndicator();
 

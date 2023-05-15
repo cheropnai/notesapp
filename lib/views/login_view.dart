@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:personalnotesapp/constants/routes.dart';
 import 'package:personalnotesapp/services/auth/auth_exceptions.dart';
 
-import 'dart:developer' as devtools show log;
 
 import '../services/auth/auth_service.dart';
 import '../utilities/dialogs/error_dialog.dart';
