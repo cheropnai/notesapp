@@ -7,7 +7,7 @@ import 'package:personalnotesapp/constants/routes.dart';
 import 'package:personalnotesapp/services/auth/auth_service.dart';
 
 import 'package:personalnotesapp/views/login_view.dart';
-import 'package:personalnotesapp/views/notes/new_notes_view.dart';
+import 'package:personalnotesapp/views/notes/create_update_note_view.dart.dart';
 import 'package:personalnotesapp/views/register_view.dart';
 import 'package:personalnotesapp/views/verify_email_view.dart';
 
@@ -27,7 +27,7 @@ void main() {
       loginRoute: (context) => const Loginview(),
       registerRoute: (context) => const RegisterView(),
       notesRoute: (context) => const notesview(),
-      newNotesRoute: (context) => const NewNoteView(),
+      createOrUpdateNoteRoute: (context) => const CreateUpdateNoteView(),
     },
   ));
 }
