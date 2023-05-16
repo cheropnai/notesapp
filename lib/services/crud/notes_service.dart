@@ -1,4 +1,4 @@
-import 'dart:async';
+/*import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:personalnotesapp/extensions/list/filter.dart';
@@ -358,3 +358,4 @@ const createUserTable = '''CREATE TABLE IF NOT EXISTS "user" (
         "email"	TEXT NOT NULL UNIQUE,
         PRIMARY KEY("id" AUTOINCREMENT)
 );''';
+*/
