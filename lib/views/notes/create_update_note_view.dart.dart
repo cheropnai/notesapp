@@ -3,9 +3,9 @@ import 'package:personalnotesapp/utilities/generics/get_arguments.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../services/auth/auth_service.dart';
-import '../../services/crud/notes_service.dart';
+//import '../../services/crud/notes_service.dart';
 import 'package:personalnotesapp/services/cloud/cloud_note.dart';
-import 'package:personalnotesapp/services/cloud/cloud_storage_exceptions.dart';
+//import 'package:personalnotesapp/services/cloud/cloud_storage_exceptions.dart';
 import 'package:personalnotesapp/services/cloud/firebase_cloud_storage.dart';
 
 import '../../utilities/dialogs/cannot_share_empty_note_dialog.dart';

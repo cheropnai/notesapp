@@ -1,19 +1,23 @@
-import 'dart:ffi';
+//import 'dart:ffi';
 
-import 'package:bloc/bloc.dart';
+//import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:path/path.dart';
+//import 'package:path/path.dart';
 
 import 'package:personalnotesapp/constants/routes.dart';
-import 'package:personalnotesapp/services/auth/auth_service.dart';
+//import 'package:personalnotesapp/services/auth/auth_service.dart';
+import 'package:personalnotesapp/services/auth/bloc/auth_bloc.dart';
+import 'package:personalnotesapp/services/auth/bloc/auth_event.dart';
+import 'package:personalnotesapp/services/auth/bloc/auth_state.dart';
+import 'package:personalnotesapp/services/auth/firebase_auth_provider.dart';
 
 import 'package:personalnotesapp/views/login_view.dart';
 import 'package:personalnotesapp/views/notes/create_update_note_view.dart.dart';
 import 'package:personalnotesapp/views/register_view.dart';
 import 'package:personalnotesapp/views/verify_email_view.dart';
 
-import 'dart:developer' as devtools show log;
+
 
 import 'views/notes/notes_view.dart';
 
@@ -24,7 +28,10 @@ void main() {
     theme: ThemeData(
       primarySwatch: Colors.blue,
     ),
-    home: const HomePage(),
+    home: BlocProvider<AuthBloc>(
+      create: (context) => AuthBloc(FirebaseAuthProvider()),
+      child: const Homepage(),
+    ),
     routes: {
       loginRoute: (context) => const Loginview(),
       registerRoute: (context) => const RegisterView(),
@@ -34,12 +41,31 @@ void main() {
   ));
 }
 
-/*class Homepage extends StatelessWidget {
+class Homepage extends StatelessWidget {
   const Homepage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    context.read<AuthBloc>().add(const AuthEventInitialize());
+
+    return BlocBuilder<AuthBloc,AuthState>(
+      builder: (context, state) {
+        if (state is AuthStateLoggedIn) {
+          return const notesview();
+        } else if (state is AuthStateNeedsVerification) {
+          return const verifyEmailView();
+        } else if (state is AuthStateLoggedOut) {
+          return const Loginview();
+        } else {
+          return const Scaffold(
+            body: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+}
+    /*return FutureBuilder(
       future: AuthService.firebase().initialize(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
@@ -63,6 +89,8 @@ void main() {
   }
 }
 */
+
+/*
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -207,3 +235,4 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
     });
   }
 }
+*/
